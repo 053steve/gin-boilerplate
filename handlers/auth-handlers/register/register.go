@@ -3,9 +3,9 @@ package handlerRegister
 import (
 	"net/http"
 
+	registerAuth "github.com/053steve/gin-boilerplate/controllers/auth/register"
+	util "github.com/053steve/gin-boilerplate/utils"
 	"github.com/gin-gonic/gin"
-	registerAuth "github.com/restuwahyu13/gin-rest-api/controllers/auth-controllers/register"
-	util "github.com/restuwahyu13/gin-rest-api/utils"
 	gpc "github.com/restuwahyu13/go-playground-converter"
 	"github.com/sirupsen/logrus"
 )
@@ -87,13 +87,15 @@ func (h *handler) RegisterHandler(ctx *gin.Context) {
 			return
 		}
 
-		_, errSendMail := util.SendGridMail(resultRegister.Fullname, resultRegister.Email, "Activation Account", "template_register", accessToken)
+		logrus.Debug(accessToken)
 
-		if errSendMail != nil {
-			defer logrus.Error(errSendMail.Error())
-			util.APIResponse(ctx, "Sending email activation failed", http.StatusBadRequest, http.MethodPost, nil)
-			return
-		}
+		// _, errSendMail := util.SendGridMail(resultRegister.Fullname, resultRegister.Email, "Activation Account", "template_register", accessToken)
+
+		// if errSendMail != nil {
+		// 	defer logrus.Error(errSendMail.Error())
+		// 	util.APIResponse(ctx, "Sending email activation failed", http.StatusBadRequest, http.MethodPost, nil)
+		// 	return
+		// }
 
 		util.APIResponse(ctx, "Register new account successfully", http.StatusCreated, http.MethodPost, nil)
 	}

@@ -3,9 +3,9 @@ package handlerCreateUser
 import (
 	"net/http"
 
+	createUser "github.com/053steve/gin-boilerplate/controllers/user/create"
+	util "github.com/053steve/gin-boilerplate/utils"
 	"github.com/gin-gonic/gin"
-	createUser "github.com/restuwahyu13/gin-rest-api/controllers/user-controllers/create"
-	util "github.com/restuwahyu13/gin-rest-api/utils"
 	gpc "github.com/restuwahyu13/go-playground-converter"
 )
 

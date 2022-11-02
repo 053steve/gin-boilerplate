@@ -1,7 +1,7 @@
 package registerAuth
 
 import (
-	model "github.com/restuwahyu13/gin-rest-api/models"
+	model "github.com/053steve/gin-boilerplate/models"
 	"gorm.io/gorm"
 )
 
@@ -30,9 +30,9 @@ func (r *repository) RegisterRepository(input *model.EntityUsers) (*model.Entity
 		return &users, <-errorCode
 	}
 
-	users.Fullname = input.Fullname
-	users.Email = input.Email
-	users.Password = input.Password
+	//pass everything in input to user entity
+
+	users = *input
 
 	addNewUser := db.Debug().Create(&users)
 	db.Commit()

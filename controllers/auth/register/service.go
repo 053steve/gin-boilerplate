@@ -1,7 +1,7 @@
 package registerAuth
 
 import (
-	model "github.com/restuwahyu13/gin-rest-api/models"
+	model "github.com/053steve/gin-boilerplate/models"
 )
 
 type Service interface {
@@ -19,9 +19,11 @@ func NewServiceRegister(repository Repository) *service {
 func (s *service) RegisterService(input *InputRegister) (*model.EntityUsers, string) {
 
 	users := model.EntityUsers{
-		Fullname: input.Fullname,
-		Email:    input.Email,
-		Password: input.Password,
+		Email:     input.Email,
+		Password:  input.Password,
+		FirstName: input.FirstName,
+		LastName:  input.LastName,
+		UserType:  input.UserType,
 	}
 
 	resultRegister, errRegister := s.repository.RegisterRepository(&users)

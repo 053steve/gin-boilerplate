@@ -1,7 +1,7 @@
-package createStudent
+package createUser
 
 import (
-	model "github.com/restuwahyu13/gin-rest-api/models"
+	model "github.com/053steve/gin-boilerplate/models"
 	"gorm.io/gorm"
 )
 

@@ -20,7 +20,7 @@ func NewHandlerRegister(service registerAuth.Service) *handler {
 
 func (h *handler) RegisterHandler(ctx *gin.Context) {
 
-	var input registerAuth.InputRegister
+	var input registerAuth.RegisterDto
 	ctx.ShouldBindJSON(&input)
 
 	config := gpc.ErrorConfig{

@@ -6,7 +6,7 @@ import (
 )
 
 type Repository interface {
-	CreateStudentRepository(input *model.EntityStudent) (*model.EntityStudent, string)
+	CreateStudentRepository(input *model.EntityUser) (*model.EntityUser, string)
 }
 
 type repository struct {
@@ -17,33 +17,30 @@ func NewRepositoryCreate(db *gorm.DB) *repository {
 	return &repository{db: db}
 }
 
-func (r *repository) CreateStudentRepository(input *model.EntityStudent) (*model.EntityStudent, string) {
+func (r *repository) CreateStudentRepository(input *model.EntityUser) (*model.EntityUser, string) {
 
-	var students model.EntityStudent
-	db := r.db.Model(&students)
+	var user model.EntityUser
+	db := r.db.Model(&user)
 	errorCode := make(chan string, 1)
 
-	checkStudentExist := db.Debug().Select("*").Where("npm = ?", input.Npm).Find(&students)
+	checkStudentExist := db.Debug().Select("*").Where("email = ?", input.Email).Find(&user)
 
 	if checkStudentExist.RowsAffected > 0 {
 		errorCode <- "CREATE_STUDENT_CONFLICT_409"
-		return &students, <-errorCode
+		return &user, <-errorCode
 	}
 
-	students.Name = input.Name
-	students.Npm = input.Npm
-	students.Fak = input.Fak
-	students.Bid = input.Bid
+	user = *input
 
-	addNewStudent := db.Debug().Create(&students)
+	addNewUser := db.Debug().Create(&user)
 	db.Commit()
 
-	if addNewStudent.Error != nil {
+	if addNewUser.Error != nil {
 		errorCode <- "CREATE_STUDENT_FAILED_403"
-		return &students, <-errorCode
+		return &user, <-errorCode
 	} else {
 		errorCode <- "nil"
 	}
 
-	return &students, <-errorCode
+	return &user, <-errorCode
 }

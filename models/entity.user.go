@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type EntityUsers struct {
+type EntityUser struct {
 	ID        string `gorm:"primaryKey;"`
 	UserName  string `gorm:"type:varchar(255);not null"`
 	Password  string `gorm:"type:varchar(255);not null"`
@@ -22,14 +22,14 @@ type EntityUsers struct {
 	UpdatedAt time.Time
 }
 
-func (entity *EntityUsers) BeforeCreate(db *gorm.DB) error {
+func (entity *EntityUser) BeforeCreate(db *gorm.DB) error {
 	entity.ID = uuid.New().String()
 	entity.Password = util.HashPassword(entity.Password)
 	entity.CreatedAt = time.Now().Local()
 	return nil
 }
 
-func (entity *EntityUsers) BeforeUpdate(db *gorm.DB) error {
+func (entity *EntityUser) BeforeUpdate(db *gorm.DB) error {
 	entity.UpdatedAt = time.Now().Local()
 	return nil
 }

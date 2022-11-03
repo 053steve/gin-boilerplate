@@ -5,7 +5,7 @@ import (
 )
 
 type Service interface {
-	CreateStudentService(input *InputCreateStudent) (*model.EntityStudent, string)
+	CreateUserService(input *CreateUserDto) (*model.EntityUser, string)
 }
 
 type service struct {
@@ -16,34 +16,18 @@ func NewServiceCreate(repository Repository) *service {
 	return &service{repository: repository}
 }
 
-func (s *service) CreateStudentService(input *InputCreateStudent) (*model.EntityStudent, string) {
-
-	students := model.EntityStudent{
-		Name: input.Name,
-		Npm:  input.Npm,
-		Fak:  input.Fak,
-		Bid:  input.Bid,
+func (s *service) CreateUserService(input *CreateUserDto) (*model.EntityUser, string) {
+	user := model.EntityUser{
+		UserName:  input.UserName,
+		Email:     input.Email,
+		Password:  input.Password,
+		FirstName: input.FirstName,
+		LastName:  input.LastName,
+		UserType:  input.UserType,
+		Active:    input.Active,
 	}
 
-	resultCreateStudent, errCreateStudent := s.repository.CreateStudentRepository(&students)
+	resultCreateUser, errCreateUser := s.repository.CreateStudentRepository(&user)
 
-	return resultCreateStudent, errCreateStudent
+	return resultCreateUser, errCreateUser
 }
-
-func (s *service) CreateUserService(input *InputCreateStudent) (*model.EntityUsers, string) {
-
-}
-
-// type EntityUsers struct {
-// 	ID        string `gorm:"primaryKey;"`
-// 	UserName  string `gorm:"type:varchar(255);not null"`
-// 	Password  string `gorm:"type:varchar(255);not null"`
-// 	FirstName string `gorm:"type:varchar(255);not null"`
-// 	LastName  string `gorm:"type:varchar(255);not null"`
-// 	UserType  string `gorm:"type:varchar(100);not null"`
-// 	Email     string `gorm:"type:varchar(255);unique;not null"`
-// 	Active    bool   `gorm:"type:bool;default:false"`
-// 	PublicKey bool   `gorm:"type:varchar(255);not null"`
-// 	CreatedAt time.Time
-// 	UpdatedAt time.Time
-// }

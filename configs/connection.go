@@ -31,7 +31,7 @@ func Connection() *gorm.DB {
 	}
 
 	err = db.AutoMigrate(
-		&model.EntityUsers{},
+		&model.EntityUser{},
 	)
 
 	if err != nil {

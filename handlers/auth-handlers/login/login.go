@@ -20,7 +20,7 @@ func NewHandlerLogin(service loginAuth.Service) *handler {
 
 func (h *handler) LoginHandler(ctx *gin.Context) {
 
-	var input loginAuth.InputLogin
+	var input loginAuth.LoginDto
 	ctx.ShouldBindJSON(&input)
 
 	config := gpc.ErrorConfig{

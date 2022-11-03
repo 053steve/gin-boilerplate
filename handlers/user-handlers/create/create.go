@@ -19,7 +19,7 @@ func NewHandlerCreateUser(service createUser.Service) *handler {
 
 func (h *handler) CreateUserHandler(ctx *gin.Context) {
 
-	var input createUser.InputCreateUser
+	var input createUser.CreateUserDto
 	ctx.ShouldBindJSON(&input)
 
 	config := gpc.ErrorConfig{

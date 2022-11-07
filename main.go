@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
+	config "github.com/053steve/gin-boilerplate/configs"
+	route "github.com/053steve/gin-boilerplate/routes"
+	util "github.com/053steve/gin-boilerplate/utils"
 	helmet "github.com/danielkov/gin-helmet"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/gzip"
-
-	config "github.com/053steve/gin-boilerplate/configs"
-	util "github.com/053steve/gin-boilerplate/utils"
 	"github.com/gin-gonic/gin"
 )
 

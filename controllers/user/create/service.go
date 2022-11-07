@@ -5,7 +5,7 @@ import (
 )
 
 type Service interface {
-	CreateUserService(input *CreateUserDto) (*model.EntityUser, string)
+	CreateUserService(input *CreateUserDto) (*model.User, string)
 }
 
 type service struct {
@@ -16,8 +16,8 @@ func NewServiceCreate(repository Repository) *service {
 	return &service{repository: repository}
 }
 
-func (s *service) CreateUserService(input *CreateUserDto) (*model.EntityUser, string) {
-	user := model.EntityUser{
+func (s *service) CreateUserService(input *CreateUserDto) (*model.User, string) {
+	user := model.User{
 		UserName:  input.UserName,
 		Email:     input.Email,
 		Password:  input.Password,

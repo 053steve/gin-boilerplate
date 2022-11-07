@@ -6,7 +6,7 @@ import (
 )
 
 type Repository interface {
-	RegisterRepository(input *model.EntityUser) (*model.EntityUser, string)
+	RegisterRepository(input *model.User) (*model.User, string)
 }
 
 type repository struct {
@@ -17,9 +17,9 @@ func NewRepositoryRegister(db *gorm.DB) *repository {
 	return &repository{db: db}
 }
 
-func (r *repository) RegisterRepository(input *model.EntityUser) (*model.EntityUser, string) {
+func (r *repository) RegisterRepository(input *model.User) (*model.User, string) {
 
-	var users model.EntityUser
+	var users model.User
 	db := r.db.Model(&users)
 	errorCode := make(chan string, 1)
 

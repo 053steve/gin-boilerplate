@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type EntityUser struct {
+type User struct {
 	ID        string `gorm:"primaryKey;"`
 	UserName  string `gorm:"type:varchar(255);not null"`
 	Password  string `gorm:"type:varchar(255);not null"`
@@ -17,19 +17,19 @@ type EntityUser struct {
 	UserType  string `gorm:"type:varchar(100);not null"`
 	Email     string `gorm:"type:varchar(255);unique;not null"`
 	Active    bool   `gorm:"type:bool;default:false"`
-	PublicKey bool   `gorm:"type:varchar(255);"`
+	PublicKey string `gorm:"type:varchar(255);default:null"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
-func (entity *EntityUser) BeforeCreate(db *gorm.DB) error {
+func (entity *User) BeforeCreate(db *gorm.DB) error {
 	entity.ID = uuid.New().String()
 	entity.Password = util.HashPassword(entity.Password)
 	entity.CreatedAt = time.Now().Local()
 	return nil
 }
 
-func (entity *EntityUser) BeforeUpdate(db *gorm.DB) error {
+func (entity *User) BeforeUpdate(db *gorm.DB) error {
 	entity.UpdatedAt = time.Now().Local()
 	return nil
 }

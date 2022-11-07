@@ -44,6 +44,7 @@ func SetupRouter() *gin.Engine {
 	  @description Init Router
 	*/
 	router := gin.Default()
+	router.SetTrustedProxies(nil)
 	/**
 	  @description Setup Mode Application
 	*/

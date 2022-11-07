@@ -17,7 +17,7 @@ type EntityUser struct {
 	UserType  string `gorm:"type:varchar(100);not null"`
 	Email     string `gorm:"type:varchar(255);unique;not null"`
 	Active    bool   `gorm:"type:bool;default:false"`
-	PublicKey bool   `gorm:"type:varchar(255);not null"`
+	PublicKey bool   `gorm:"type:varchar(255);"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
